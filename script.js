@@ -1,6 +1,7 @@
 var button = document.getElementById("enter");
 var input = document.getElementById("userinput");
 var ul = document.querySelector("ul");
+var li = document.getElementsByTagName("li");
 
 function inputLength() {
   return input.value.length;
@@ -11,7 +12,28 @@ function createListElement() {
   li.appendChild(document.createTextNode(input.value));
   ul.appendChild(li);
   input.value = "";
+  //li.addEventListener('click', addToggle);
+
+
+  var button = document.createElement("button");
+  button.appendChild(document.createTextNode("Done!"));
+  li.appendChild(button);
+  button.onclick = underlineParent;
+
+  var button = document.createElement("button");
+  button.appendChild(document.createTextNode("Delete!"));
+  li.appendChild(button);
+
+  button.onclick= removeParent;
 }
+
+function underlineParent(event) {
+  event.target.parentNode.classList.toggle("done");
+}
+function removeParent(event) {
+  event.target.parentNode.remove();
+}
+
 
 function addListAfterClick() {
   if (inputLength() > 0) {
@@ -25,7 +47,13 @@ function addListAfterKeyPress(event) {
     createListElement()
   }
 }
+// function addToggle() {
+//   li.classlist.toggle('done')
+// }
 
 button.addEventListener("click", addListAfterClick);
 
 input.addEventListener("keypress", addListAfterKeyPress);
+
+//li.addEventListener("toggle", addToggle);
+
